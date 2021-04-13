@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function showCustomers(customers, targetList) {
+                const currentHTML = customers.map((i, index)=>{
+                   return (`<li id=${index}>
+                            <p onclick="show(${index})">${i.name}</p>
+                            </li>`)
+                }) 
+                targetList.innerHTML = currentHTML;
+                }
+
+                document.body.innerHTML = `
+                <div>
+                <ul id="customers">
+                    
+                </ul>
+                </div>
+                `;
+
+                let customers = [{name: "John", email: "john@example.com"},
+                                {name: "Mary", email: "mary@example.com"}];
+
+
+                showCustomers(customers, document.getElementById("customers"));
+
+                const show = (id) =>{
+                    const currentLi =  document.querySelector(`li[id='${id}']`);
+                    let currentP = document.createElement('p');
+                    currentP.innerHTML = `<p id="${id}" onclick="hideP(${id})">${customers[id].email}</p>`;
+                    currentLi.append(currentP);
+
+                }
+                const hideP =(id)=>{
+                    const delP = document.querySelector(`p[id='${id}']`);
+                    delP.remove();
+                }
+                let customerParagraph = document.querySelectorAll("li > p")[0];
+                if(customerParagraph) {
+                customerParagraph.click();
+                }
+                console.log(document.body.innerHTML);
+    </script>
+</body>
+</html>
